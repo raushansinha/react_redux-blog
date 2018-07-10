@@ -4,6 +4,8 @@ import { Field, reduxForm } from 'redux-form'; //reduxForm is similar to connect
 import { fetchPosts } from '../actions';
 import { bindActionCreator, bindActionCreators } from 'redux';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
+import { createPost } from '../actions/index';
 
 class NewPost extends Component {
 
@@ -50,7 +52,10 @@ class NewPost extends Component {
 
     onSubmit(values) {
         //this === component
-        console.log(values);
+        //console.log(values);
+        this.props.createPost(values, () => {
+            this.props.history.push('/');
+        });
     }
 
     render() {
@@ -78,6 +83,9 @@ class NewPost extends Component {
                     component={this.renderField}
                 />
                 <button type="submit" className="btn btn-primary">Submit</button>
+                <Link className="btn btn-danger" to="/">
+                    Cancel
+                </Link>
             </form>
         );
     }
@@ -108,7 +116,9 @@ function validate(values) {
 export default reduxForm({
     validate,
     form: 'NewPostsForm' // this is name of the form on the page
-})(NewPost);
+})(
+    connect(null, { createPost })(NewPost)
+);
 
 
 //For example we can add one more form to this component s as belwo
