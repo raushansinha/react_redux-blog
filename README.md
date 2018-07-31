@@ -12,7 +12,7 @@ Sample ReactJS application to implement CURD and routing
         // e.g. return {...state, action1.payload}
       case Action1: 
         // return new state using action1 payload
-        // e.g. return {...state, action1.payload}
+        // e.g. return [...state, action1.payload]
       case Action1: 
         // return new state using action1 payload
         // e.g. return {...state, action1.payload}
